@@ -54,14 +54,14 @@
         //if event is sticky it will be dispatch every time object subscribes to this
         events[event_name].sticky && trigger(event_name, fn, events[event_name].data);
     },
-        
+
     trigger = function(event_name, fn, args) {
         var apply_args = [{type:event_name}].concat(args);
         fn.apply(this, apply_args);
     },
 
-    unbind = function(obj, event_name) {
-        for_all_subscribers(event_name, 
+    unbind = function(event_name, obj) {
+        for_all_subscribers(event_name,
             function(subscriber, all_subscribers, index) {
                 if (subscriber === obj) {
                     //no need to check if events[event_name]
