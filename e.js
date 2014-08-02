@@ -13,7 +13,7 @@
         root[globalName] = factory();
     }
 }(this, function () {
-    
+
     "use strict";
 
     var events = {},
@@ -21,7 +21,7 @@
     event_exists = function(event_name) {
         return !!events[event_name];
     },
-    
+
     for_all_subscribers = function(event_name, fn) {
         if (event_exists(event_name)) {
             //make a copy of all subscribers for iteration
@@ -33,13 +33,13 @@
             }
         }
     },
-        
+
     create_if_none = function(event_name, cfg) {
         event_exists(event_name) || (events[event_name] = []);
         cfg && cfg.sticky && (events[event_name].sticky = true);
         cfg && cfg.data && (events[event_name].data = cfg.data);
     },
-        
+
     dispatch_event = function(event_name, cfg) {
         cfg && cfg.sticky && create_if_none(event_name, cfg);
         for_all_subscribers(event_name,
@@ -70,14 +70,20 @@
                 }
             }
         );
+    },
+
+    unbindAll = function(event_name) {
+        delete events[event_name];
     };
-    
+
     return {
         publish: dispatch_event,
         subscribe: bind,
+        on: bind,
         unsubscribe: unbind,
+        unsubscribeAll: unbindAll,
         //peek into events
         __events__:  events
     };
-    
+
 }, "E"));
