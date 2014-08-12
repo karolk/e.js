@@ -1,7 +1,12 @@
 var assert = require("assert")
-var E = require('../e')
 
 describe('E', function(){
+
+    var E;
+    beforeEach(function() {
+        E = require('../e')
+    })
+
     describe('#subscribe()', function(){
         it('should expect 2 arguments', function(){
             assert.equal(E.subscribe.length, 2);
