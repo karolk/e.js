@@ -30,6 +30,17 @@ describe('E', function(){
         })
     })
 
+    describe('#onAll()', function() {
+        it('should create namespace for all observers', function() {
+            var subscriber = function(){}
+            E.onAll(['tom', 'jerry'], subscriber)
+            assert.equal(typeof E.__events__['tom'], "object")
+            assert.equal(E.__events__['tom'][0], subscriber)
+            assert.equal(typeof E.__events__['jerry'], "object")
+            assert.equal(E.__events__['jerry'][0], subscriber)
+        })
+    })
+
     describe('#publish()', function(){
         it('should expect 2 arguments', function(){
             assert.equal(E.publish.length, 2);

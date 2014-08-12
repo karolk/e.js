@@ -55,6 +55,10 @@
         events[event_name].sticky && trigger(event_name, fn, events[event_name].data);
     },
 
+    bindAll = function(events, listener) {
+
+    },
+
     trigger = function(event_name, fn, args) {
         var apply_args = [{type:event_name}].concat(args);
         fn.apply(this, apply_args);
@@ -80,6 +84,7 @@
         publish: dispatch_event,
         subscribe: bind,
         on: bind,
+        onAll: bindAll,
         unsubscribe: unbind,
         unsubscribeAll: unbindAll,
         //peek into events
